@@ -91,3 +91,50 @@ export {
   hookOnce,
   removeHook
 };
+
+/**
+ * An Object that contains lifecycle hooks as keys which point to an array
+ * of functions that are run when a lifecycle is triggered
+ *
+ * @private
+ */
+const controlHooks_ = {};
+
+/**
+ * Get a list of hooks for a specific lifecycle
+ *
+ * @param  {string} type
+ *         the lifecyle to get hooks from
+ *
+ * @param  {Function|Function[]} [fn]
+ *         Optionally add a hook (or hooks) to the lifecycle that your are getting.
+ *
+ * @return {Array}
+ *         an array of hooks, or an empty array if there are none.
+ */
+const controlHooks = function(type, fn) {
+  controlHooks_[type] = controlHooks_[type] || [];
+  if (fn) {
+    controlHooks_[type] = controlHooks_[type].concat(fn);
+  }
+  return controlHooks_[type];
+};
+
+/**
+ * Add a function hook to a specific videojs lifecycle.
+ *
+ * @param {string} type
+ *        the lifecycle to hook the function to.
+ *
+ * @param {Function|Function[]}
+ *        The function or array of functions to attach.
+ */
+const controlHook = function(type, fn) {
+  controlHooks(type, fn);
+};
+
+export {
+  controlHooks_,
+  controlHooks,
+  controlHook
+};

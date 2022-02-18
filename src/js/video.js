@@ -9,7 +9,10 @@ import {
   hooks,
   hook,
   hookOnce,
-  removeHook
+  removeHook,
+  controlHooks_,
+  controlHooks,
+  controlHook
 } from './utils/hooks';
 import * as setup from './setup';
 import * as stylesheet from './utils/stylesheet.js';
@@ -189,6 +192,10 @@ videojs.hooks = hooks;
 videojs.hook = hook;
 videojs.hookOnce = hookOnce;
 videojs.removeHook = removeHook;
+
+videojs.controlHooks_ = controlHooks_;
+videojs.controlHooks = controlHooks;
+videojs.controlHook = controlHook;
 
 // Add default styles
 if (window.VIDEOJS_NO_DYNAMIC_STYLE !== true && Dom.isReal()) {
